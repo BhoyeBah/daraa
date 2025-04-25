@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel utilisateur{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+		<div class="row">
+			<div class="col-md-6 col-sm-12">
+				<div class="title">
+					<h4>Form</h4>
+				</div>
+				<nav aria-label="breadcrumb" role="navigation">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Tableau de board</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Formulaire de création d'un utilisateur</li>
+					</ol>
+				</nav>
+			</div>
+		    <div class="col-md-6 col-sm-12 text-right">
+					<a class="btn btn-success" href="{{ path('app_users_index') }}">
+						Liste des utilisateurs
+					</a>
+			</div>
+		</div>
+	</div>
+	<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+        <div class="pull-left">
+            <h4 class="text-success h4">Créer un nouvel utilisateur</h4>
+            <p class="mb-30">Remplissez les informations ci-dessous</p>
+        </div>
+    </div>
+
+    {{ include('user/_form.html.twig') }}
+</div>
+    
+{% endblock %}

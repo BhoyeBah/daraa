@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Reunion{% endblock %}
+
+{% block body %}
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="title">
+                <h4>Form</h4>
+            </div>
+            <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Formulaire de création d'une réunion</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-6 col-sm-12 text-right">
+            <a class="btn btn-success" href="{{ path('app_reunion_index') }}">
+                Historique des réunions
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+        <div class="pull-left">
+            <h4 class="text-success h4">Créer une nouvelle réunion</h4>
+            <p class="mb-30">Remplissez les informations ci-dessous</p>
+        </div>
+    </div>
+
+    {{ form_start(form) }}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <!-- Date -->
+                <div class="form-group row">
+                    {{ form_label(form.date, null, {'label_attr': {'class': 'col-sm-12 col-md-2 col-form-label'}}) }}
+                    <div class="col-sm-12 col-md-10">
+                        {{ form_widget(form.date, {'attr': {'class': 'form-control', 'placeholder': 'jj/mm/aaaa --:--'}}) }}
+                    </div>
+                </div>
+                <!-- Thèmes -->
+                <div class="form-group row">
+                    {{ form_label(form.theme, null, {'label_attr': {'class': 'col-sm-12 col-md-2 col-form-label'}}) }}
+                    <div class="col-sm-12 col-md-10">
+                        {{ form_widget(form.theme, {'attr': {'class': 'form-control', 'placeholder': 'Notre premier thème'}}) }}
+                    </div>
+                </div>
+                <!-- Lieu -->
+                <div class="form-group row">
+                    {{ form_label(form.lieu, null, {'label_attr': {'class': 'col-sm-12 col-md-2 col-form-label'}}) }}
+                    <div class="col-sm-12 col-md-10">
+                        {{ form_widget(form.lieu, {'attr': {'class': 'form-control', 'placeholder': 'Lieu'}}) }}
+                    </div>
+                </div>
+                <!-- Sujet Abordés -->
+                <div class="form-group row">
+                    <label for="sujetaborde" class="col-sm-12 col-md-2 col-form-label">Sujet Abordés</label>
+                    <div class="col-sm-12 col-md-10">
+                        {{ form_widget(form.sujetaborde, {'attr': {'class': 'form-control', 'rows': '4', 'placeholder': 'Entrez les sujets abordés'}}) }}
+                    </div>
+                </div>
+                <!-- Décisions Prises -->
+                <div class="form-group row">
+                    <label for="decisionprise" class="col-sm-12 col-md-2 col-form-label">Décisions Prises</label>
+                    <div class="col-sm-12 col-md-10">
+                        {{ form_widget(form.decisionprise, {'attr': {'class': 'form-control', 'rows': '4', 'placeholder': 'Entrez les décisions prises'}}) }}
+                    </div>
+                </div>
+           <!-- Intervenants -->
+                <div class="form-group row">
+                    {{ form_label(form.membres, null, {'label_attr': {'class': 'col-sm-12 col-md-2 col-form-label'}}) }}
+                    <div class="col-sm-12 col-md-10">
+                        {{ form_widget(form.membres, {'attr': {'class': 'form-control', 'placeholder': 'Notre premier thème'}}) }}
+                    </div>
+                </div>
+                 
+                <!-- Submit Button -->
+                <div class="form-group row">
+                    <div class="col-sm-12 col-md-10 offset-md-2">
+                        <button type="submit" class="btn btn-success">{{ button_label|default('Enrégistrer') }}</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="container">
+                    <div class="card member-selection">
+                        <div class="card-header">
+                            <h4 class="text-success">Liste des Membres</h4>
+                        </div>
+                        <div class="card-body">
+                            <!-- Conteneur table-responsive avec d-flex -->
+                            <div class="d-flex justify-content-center">
+                                <div class="table-responsive">
+                                    <table class="data-table table stripe hover wrap table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Nom</th>
+                                                <th>Prénom</th>
+                                                <th>Présent</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for membre in membres %}
+                                                <tr>
+                                                    <td>{{ membre.nom }}</td>
+                                                    <td>{{ membre.prenom }}</td>
+                                                    <td>
+                                                        <input type="checkbox" name="membre_{{ membre.id }}" value="present" checked>
+                                                    </td>
+                                                </tr>
+                                            {% else %}
+                                                <tr>
+                                                    <td colspan="3">Aucun enregistrement trouvé</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}

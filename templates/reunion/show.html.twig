@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la réunion{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="title">
+                    <h4>Détails de la réunion</h4>
+                </div>
+                <nav aria-label="breadcrumb" role="navigation">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Détails de la réunion</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="pd-20 card-box mb-30">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="text-success">Dahira : {{ reunion.dahiras.nom }}</h4>
+                <h4 class="text-success">Date : {{ reunion.date|date('d/m/Y H:i') }}</h4>
+                <h4 class="text-success"><strong>Lieu :</strong> {{ reunion.lieu }}</h4>
+            </div>
+            <div class="col-md-6 text-right">
+                <h4 class="text-success">Encadreur : {{ reunion.encadreur.nom }} {{ reunion.encadreur.prenom }}</h4>
+            </div>
+        </div>
+        <h5 class="text-success mt-4">Liste des présences</h5>
+
+        <!-- Tableau avec ombre et marges -->
+        <div class="table-responsive p-3 my-5 bg-white rounded">
+            <table class="table table-bordered data-table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Présent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for presence in presences %}
+                        <tr>
+                            <td>{{ presence.membre.nom }}</td>
+                            <td>{{ presence.membre.prenom }}</td>
+                            <td>
+                                <span class="badge {{ presence.present ? 'badge-success' : 'badge-danger' }}">
+                                    {{ presence.present ? 'Présent' : 'Absent' }}
+                                </span>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3" class="text-center">Aucune présence enregistrée.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- Suppression de la couleur verte pour le thème -->
+        <h1 class="text-center my-4">{{ reunion.theme.nom }}</h1>
+
+        <p><strong>Sujet abordé :</strong> {{ reunion.sujetaborde }}</p>
+        <p><strong>Décisions prises :</strong> {{ reunion.decisionprise }}</p>
+
+        <div class="mt-4 d-flex justify-content-between">
+             <a id="back" href="{{ path('app_reunion_index') }}" class="btn rounded-pill btn-primary">
+            <i class="bx bx-arrow-back"></i> Retour
+        </a>
+        <a id="back" href="{{ path('reunion_print_Detail', { 'id': reunion.id }) }}" class="btn rounded-pill btn-success">
+            <i class="bx bx-arrow-back"></i> imprimer
+        </a>
+        </div>
+    </div>
+{% endblock %}

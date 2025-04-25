@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel encadreur{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+		<div class="row">
+			<div class="col-md-6 col-sm-12">
+				<div class="title">
+					<h4>Form</h4>
+				</div>
+				<nav aria-label="breadcrumb" role="navigation">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Tableau de board</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Formulaire de création d'un encadreur</li>
+					</ol>
+				</nav>
+			</div>
+		    <div class="col-md-6 col-sm-12 text-right">
+					<a class="btn btn-success" href="{{ path('app_encadreur_index') }}">
+						Liste des encadreurs
+					</a>
+			</div>
+		</div>
+	</div>
+	<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+        <div class="pull-left">
+            <h4 class="text-success h4">Créer un nouvel encadreur</h4>
+            <p class="mb-30">Remplissez les informations ci-dessous</p>
+        </div>
+    </div>
+
+    {{ include('encadreur/_form.html.twig') }}
+</div>
+    
+{% endblock %}

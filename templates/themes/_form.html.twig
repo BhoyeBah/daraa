@@ -1,0 +1,29 @@
+{% block body %}
+<!-- Default Basic Forms Start -->
+
+
+    {{ form_start(form) }}
+    
+    <div class="form-group row">
+        {{ form_label(form.nom, null, {'label_attr': {'class': 'col-sm-12 col-md-2 col-form-label'}}) }}
+        <div class="col-sm-12 col-md-10">
+            {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form_label(form.description, null, {'label_attr': {'class': 'col-sm-12 col-md-2 col-form-label'}}) }}
+        <div class="col-sm-12 col-md-10">
+            {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Description'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-12 col-md-10 offset-md-2">
+            <button type="submit" class="btn btn-success">{{ button_label|default('Enrégistrer') }}</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+</div>
+<!-- Default Basic Forms End -->
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}theme{% endblock %}
+
+{% block body %}
+<div class="page-header">
+		<div class="row">
+			<div class="col-md-6 col-sm-12">
+				<div class="title">
+					<h4>Details du theme {{theme.nom}} </h4>
+				</div>
+				<nav aria-label="breadcrumb" role="navigation">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Tableau de board</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Information du theme</li>
+					</ol>
+				</nav>
+			</div>
+		    <div class="col-md-6 col-sm-12 text-right">
+					<a class="btn btn-success" href="{{ path('app_themes_index') }}">
+						Liste des themes
+					</a>
+			</div>
+		</div>
+        <div class="demo-inline-spacing mt-3">
+            <ul class="list-group">
+                <li class="list-group-item d-flex align-items-center">
+                       <strong class="mx-3"><i class="bx bx-id-card me-2"></i> Nom: </strong> {{ theme.nom }}
+                </li>
+    
+                <li class="list-group-item d-flex align-items-center">
+
+                    <strong class="mx-3"><i class="bx bx-align-left me-2"></i> Description : </strong> {{ theme.description }}
+                </li>
+
+
+{#                <li class="list-group-item d-flex align-items-center">#}
+
+{#                <strong class="mx-3"> <i class="bx bx-calendar me-2"></i> Date de création: </strong>#}
+{#                {{ theme.createdAt ? theme.createdAt|date('Y-m-d H:i:s') : '' }}#}
+{#                </li>#}
+{#                <li class="list-group-item d-flex align-items-center">#}
+
+{#                <strong class="mx-3"><i class="bx bx-calendar-edit me-2"></i> Date de modification:</strong>#}
+{#                {{ theme.updatedAt ? theme.updatedAt|date('Y-m-d H:i:s') : '' }}#}
+            </ul>
+        </div>
+    </div>
+
+	</div>
+        
+{% endblock %}

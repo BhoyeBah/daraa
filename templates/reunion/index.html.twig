@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des themes{% endblock %}
+
+{% block body %}
+<div class="page-header">
+					<div class="row">
+						<div class="col-md-6 col-sm-12">
+							<div class="title">
+								<h4>DataTable</h4>
+							</div>
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="/">Tableau de board</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Listes des reunions</li>
+								</ol>
+							</nav>
+						</div>
+						<div class="col-md-6 col-sm-12 text-right">
+                    	<a href="{{ path('app_reunion_new') }}" class="btn btn-success">Créer une reunion</a>
+						</div>
+					</div>
+				</div>
+				<!-- Simple Datatable start -->
+				<div class="card-box mb-30">
+					<div class="pd-20">
+						<h4 class="text-success h4">Liste des reunions</h4>
+						<!-- <p class="mb-0">you can find more options <a class="text-primary" href="https://datatables.net/" target="_blank">Click Here</a></p> -->
+					</div>
+					<div class="pb-20">
+						<table class="data-table table stripe hover nowrap table-bordered">
+							<thead>
+								<tr>
+									<th class="table-plus datatable-nosort">Réference</th>
+									<th class="table-plus datatable-nosort">Date Reunion</th>
+									<th>Lieu Reunion</th>
+									<th>Themes</th>
+									<th>Dahiras</th>
+									<th class="datatable-nosort">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+							{% for reunion in reunion %}    
+							<tr>
+								<td>{{ reunion.numero }}</td>
+								<td>{{ reunion.date|date('H:i:s d/m/Y') }}</td>
+								<td>{{ reunion.lieu }}</td>
+								<td>{{ reunion.theme.nom }}</td>
+								<td>{{ reunion.dahiras.nom }}</td>
+								<td> <a href="{{ path('app_reunion_show', {'id': reunion.id}) }}" class="btn btn-sm btn-success"><i class="dw dw-eye"></i></a></td>
+							</tr>    
+							{% endfor %}     		
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- Simple Datatable End -->		
+			
+
+{% endblock %}

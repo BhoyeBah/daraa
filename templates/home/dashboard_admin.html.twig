@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de board!{% endblock %}
+
+{% block body %}
+			<div class="card-box pd-20 height-100-p mb-30">
+				<div class="row align-items-center">
+					<div class="col-md-4">
+						<img src="vendors/images/banner-img.png" alt="">
+					</div>
+					<div class="col-md-8">
+						<h4 class="font-20 weight-500 mb-10 text-capitalize">
+							Bienvenue Monsieur
+                             <div class="weight-600 font-30 text-blue">
+                                {{ app.user.nom }} {{ app.user.prenom }}
+                            </div>
+						</h4>
+						<p class="font-18 max-width-600">Vous êtes connecté en tant qu'
+							 <strong>
+							 {% for role in app.user.roles %}
+							{% if role == 'ROLE_ADMIN' %}
+								Administrateur
+							{% elseif role == 'ROLE_ENCADREUR' %}
+								Encadreur
+							{% endif %}
+							{% endfor %}
+							</strong>!
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="xs-pd-20-10 pd-ltr-20">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-6 col-sm-12">
+						<div class="title">
+							<h4>Dashboard</h4>
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="/">Tableau de board</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+							</ol>
+						</nav>
+					</div>
+					
+					<div class="col-md-6 col-sm-12 text-right">
+						<div class="dropdown">
+							<a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+								Selectionnez un mois
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<a class="dropdown-item" href="{{ path('app_home', { mois: 1 }) }}">Janvier</a>
+								<a class="dropdown-item" href="{{ path('app_home', { mois: 2 }) }}">Février</a>
+								<a class="dropdown-item" href="{{ path('app_home', { mois: 3 }) }}">Mars</a>
+								<a class="dropdown-item" href="{{ path('app_home', { mois: 4 }) }}">Avril</a>
+								<a class="dropdown-item" href="{{ path('app_home', { mois: 5 }) }}">Mai</a>
+								<a class="dropdown-item" href="{{ path('app_home', { mois: 6 }) }}">Juin</a>
+								<a class="dropdown-item" href="{{ path('app_home', { mois: 7 }) }}">Juillet</a>
+								<a class="dropdown-item" href="{{ path('app_home', { mois: 8 }) }}">Août</a>
+								<a class="dropdown-item" href="{{ path('app_home', { mois: 9 }) }}">Septembre</a>
+								<a class="dropdown-item" href="{{ path('app_home', { mois: 10 }) }}">Octobre</a>
+								<a class="dropdown-item" href="{{ path('app_home', { mois: 11 }) }}">Novembre</a>
+								<a class="dropdown-item" href="{{ path('app_home', { mois: 12 }) }}">Décembre</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xl-3 mb-30">
+					<div class="card-box height-100-p widget-style1">
+						<div class="d-flex flex-wrap align-items-center">
+							<div class="progress-data">
+								<div id="chart"></div>
+							</div>
+							<div class="widget-data">
+								<div class="h4 mb-0">{{ dahiraCount }}</div>
+								<div class="weight-600 font-14">Dahiras</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 mb-30">
+					<div class="card-box height-100-p widget-style1">
+						<div class="d-flex flex-wrap align-items-center">
+							<div class="progress-data">
+								<div id="chart2"></div>
+							</div>
+							<div class="widget-data">
+								<div class="h4 mb-0">{{ membreCount }}</div>
+								<div class="weight-600 font-14">Membres</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 mb-30">
+					<div class="card-box height-100-p widget-style1">
+						<div class="d-flex flex-wrap align-items-center">
+							<div class="progress-data">
+								<div id="chart3"></div>
+							</div>
+							<div class="widget-data">
+								<div class="h4 mb-0">{{ encadreurCount }}</div>
+								<div class="weight-600 font-14">Encadreur</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 mb-30">
+					<div class="card-box height-100-p widget-style1">
+						<div class="d-flex flex-wrap align-items-center">
+							<div class="progress-data">
+								<div id="chart4"></div>
+							</div>
+							<div class="widget-data">
+								<div class="h4 mb-0">{{ ratio }}</div>
+								<div class="weight-600 font-14">Reunions/Dahiras</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="row">
+				<div class="col-xl-8 mb-30">
+					<div class="card-box height-100-p pd-20">
+						<h2 class="h4 mb-20">Activity</h2>
+						<div id="chart5"></div>
+					</div>
+				</div>
+				<div class="col-xl-4 mb-30">
+					<div class="card-box height-100-p pd-20">
+						<h2 class="h4 mb-20">Lead Target</h2>
+						<div id="chart6"></div>
+					</div>
+				</div>
+			</div> -->
+
+{% endblock %}

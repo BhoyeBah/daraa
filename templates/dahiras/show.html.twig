@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}dahira{% endblock %}
+
+{% block body %}
+<div class="page-header">
+		<div class="row">
+			<div class="col-md-6 col-sm-12">
+				<div class="title">
+					<h4>Details du dahira : {{dahira.nom}} </h4>
+				</div>
+				<nav aria-label="breadcrumb" role="navigation">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Tableau de board</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Information de la dahiras</li>
+					</ol>
+				</nav>
+			</div>
+		    <div class="col-md-6 col-sm-12 text-right">
+					<a class="btn btn-success" href="{{ path('app_dahiras_index') }}">
+						Liste des dahiras
+					</a>
+			</div>
+		</div>
+        <div class="demo-inline-spacing mt-3">
+            <ul class="list-group">
+                <li class="list-group-item d-flex align-items-center">
+                       <strong class="mx-3"><i class="bx bx-id-card me-2"></i> Nom: </strong> {{ dahira.nom}}
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+
+                       <strong class="mx-3"><i class="bx bx-id-card me-2"></i> Adresse: </strong> {{ dahira.adresse}}
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+
+                    <strong class="mx-3"><i class="bx bx-pencil me-2"></i> Description: </strong> {{ dahira.description}}
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+
+                    <strong class="mx-3"><i class="bx bx-pencil me-2"></i> Description: </strong> {{ dahira.description}}
+                </li>
+                {% for encadreur in dahira.encadreurs %}
+                <li class="list-group-item d-flex align-items-center">
+
+                    <strong class="mx-3"><i class="bx bx-pencil me-2"></i> Encadreur: </strong> {{ encadreur.nom}} {{ encadreur.prenom}} 
+                </li>
+                {% endfor %}
+{#                <li class="list-group-item d-flex align-items-center">#}
+
+{#                <strong class="mx-3"> <i class="bx bx-calendar me-2"></i> Date de création: </strong>#}
+{#                {{ dahira.createdAt ? dahira.createdAt|date('Y-m-d H:i:s') : '' }}#}
+{#                </li>#}
+{#                <li class="list-group-item d-flex align-items-center">#}
+
+{#                <strong class="mx-3"><i class="bx bx-calendar-edit me-2"></i> Date de modification:</strong>#}
+{#                {{ dahira.updatedAt ? dahira.updatedAt|date('Y-m-d H:i:s') : '' }}#}
+            </ul>
+        </div>
+    </div>
+<!-- Simple Datatable start -->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-success h4">Liste des membres</h4>
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap table-bordered">
+            <thead>
+                <tr>
+                    <th class="table-plus datatable-nosort">Matricule</th>
+                    <th class="table-plus datatable-nosort">Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Adresse</th>
+                    <th>Dahiras</th>
+                    <th>Professions</th>
+                    <th class="datatable-nosort">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for membre in dahira.membres %}
+                    <tr>
+                        <td class="table-plus">{{ membre.numero }}</td>
+                        <td class="table-plus">{{ membre.nom }}</td>
+                        <td>{{ membre.prenom }}</td>
+                        <td>{{ membre.email }}</td>
+                        <td>{{ membre.telephone }}</td>
+                        <td>{{ membre.adresse }}</td>
+                        <td>{{ membre.dahiras.nom }}</td>
+                        <td>
+                        {% if membre.specialite is not empty %}
+                            <ul>
+                                {% for specialite in membre.specialite %}
+                                    <li>{{ specialite.nom }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            Pas de profession
+                        {% endif %}
+                    </td>
+                                
+                        <td>
+                            <a href="{{ path('app_membres_show', {'id': membre.id}) }}" class="btn btn-sm btn-success"><i class="dw dw-eye"></i></a>
+                            <a href="{{ path('app_membres_edit', {'id': membre.id}) }}" class="btn btn-sm btn-secondary"><i class="dw dw-edit2"></i></a>
+                            {{ include('membres/_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">Aucun enregistrement trouvé</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+<!-- Simple Datatable start -->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-success h4">Liste des reunion</h4>
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap table-bordered">
+            <thead>
+                <tr>
+                    <th class="table-plus datatable-nosort">Réference</th>
+                    <th class="table-plus datatable-nosort">Date reunion</th>
+                    <th class="table-plus datatable-nosort">Thème reunion</th>
+                    <th>Dahira</th>
+                    <th>Lieu reunion</th>
+                    <th class="datatable-nosort">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reunion in dahira.reunions %}
+                    <tr>
+                        <td class="table-plus">{{ reunion.numero }}</td>
+                        <td class="table-plus">{{ reunion.date|date('H:i:s d/m/Y') }}</td>
+                        <td>{{ reunion.lieu }}</td>
+						<td>{{ reunion.theme.nom }}</td>
+						<td>{{ reunion.dahiras.nom }}</td>                            
+                        <td>
+                            <a href="{{ path('app_reunion_show', {'id': reunion.id}) }}" class="btn btn-sm btn-success"><i class="dw dw-eye"></i></a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">Aucun enregistrement trouvé</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>  
+{% endblock %}

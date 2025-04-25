@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des dahiras{% endblock %}
+
+{% block body %}
+<div class="page-header">
+					<div class="row">
+						<div class="col-md-6 col-sm-12">
+							<div class="title">
+								<h4>DataTable</h4>
+							</div>
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="/">Tableau de board</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Listes des dahiras</li>
+								</ol>
+							</nav>
+						</div>
+						<div class="col-md-6 col-sm-12 text-right">
+                    	<a href="{{ path('app_dahiras_new') }}" class="btn btn-success">Créer un dahiras</a>
+						</div>
+					</div>
+				</div>
+				<!-- Simple Datatable start -->
+				<div class="card-box mb-30">
+					<div class="pd-20">
+						<h4 class="text-success h4">Liste des dahiras</h4>
+						<!-- <p class="mb-0">you can find more options <a class="text-primary" href="https://datatables.net/" target="_blank">Click Here</a></p> -->
+					</div>
+					<div class="pb-20">
+						<table class="data-table table stripe hover nowrap table-bordered">
+							<thead>
+								<tr>
+									<th class="table-plus datatable-nosort">Nom</th>
+									<th>Adresse</th>
+									<th>Description</th>
+									<th class="datatable-nosort">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+                            {% for dahira in dahiras %}
+                                <tr>
+									<td class="table-plus">{{dahira.nom}}</td>
+									<td>{{dahira.adresse}}</td>
+									<td>{{dahira.description}}</td>
+									<td>
+                                        <a href="{{ path('app_dahiras_show', {'id': dahira.id}) }}" class="btn btn-sm btn-success"><i class="dw dw-eye"></i></a>
+                                        <a href="{{ path('app_dahiras_edit', {'id': dahira.id}) }}" class="btn btn-sm btn-secondary"><i class="dw dw-edit2"></i></a>
+                               			{{ include('dahiras/_delete_form.html.twig') }}
+           							</td>
+								</tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="7">no records found</td>
+                                </tr>
+                                {% endfor %}
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- Simple Datatable End -->		
+			
+
+{% endblock %}

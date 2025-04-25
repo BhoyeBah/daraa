@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+<div class="page-header">
+					<div class="row">
+						<div class="col-md-6 col-sm-12">
+							<div class="title">
+								<h4>DataTable</h4>
+							</div>
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="/">Tableau de board</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Listes des utilisateurs</li>
+								</ol>
+							</nav>
+						</div>
+						<div class="col-md-6 col-sm-12 text-right">
+                    	<a href="{{ path('app_users_new') }}" class="btn btn-success">Créer un utilisateur</a>
+						</div>
+					</div>
+				</div>
+				<!-- Simple Datatable start -->
+				<div class="card-box mb-30">
+					<div class="pd-20">
+						<h4 class="text-success h4">Liste des utilisateurs</h4>
+						<!-- <p class="mb-0">you can find more options <a class="text-primary" href="https://datatables.net/" target="_blank">Click Here</a></p> -->
+					</div>
+					<div class="pb-20">
+						<table class="data-table table stripe hover nowrap table-bordered">
+							<thead>
+								<tr>
+									<th class="table-plus datatable-nosort">Nom</th>
+									<th>Prénom</th>
+									<th>Email</th>
+									<th>Téléphone</th>
+									<th>Adresse</th>
+									<th>Status</th>
+									<th class="datatable-nosort">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+
+                                {% for user in users %}
+                                <tr>
+									<td class="table-plus">{{user.nom}}</td>
+									<td>{{user.prenom}}</td>
+									<td>{{user.email}}</td>
+									<td>{{user.telephone}}</td>
+									<td>{{user.adresse}}</td>
+									<td>
+									<form action="{{ path('app_users_state', { 'id': user.id }) }}" method="POST">
+                                
+										<input type="hidden" name="_token" value="{{ csrf_token('toggle_user') }}">
+										{% if user.isStatus() != true %}
+											<button class="btn text-danger" type="submit" onclick="return confirm('Voulez-vous activer le user ?');">
+												<span class="badge bg-label-danger me-1">Désactivé</span>
+											</button>
+										{% else %}
+											<button class="btn text-success" type="submit" onclick="return confirm('Voulez-vous désactiver le user ?');">
+												<span class="badge bg-label-success me-1">Activé</span>
+											</button>
+										{% endif %}
+                           			</form>
+									</td>
+                                    <td>
+                                        <a href="{{ path('app_users_show', {'id': user.id}) }}" class="btn btn-sm btn-success"><i class="dw dw-eye"></i></a>
+                                        <a href="{{ path('app_users_edit', {'id': user.id}) }}" class="btn btn-sm btn-secondary"><i class="dw dw-edit2"></i></a>
+                               			{{ include('user/_delete_form.html.twig') }}
+           							</td>
+								</tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="7">no records found</td>
+                                </tr>
+                                {% endfor %}
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- Simple Datatable End -->		
+			
+
+{% endblock %}

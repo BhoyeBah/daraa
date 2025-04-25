@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un utilisateur{% endblock %}
+
+{% block body %}
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="title">
+                <h4>Formulaire de modification</h4>
+            </div>
+            <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Tableau de bord</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Formulaire de modification d'un utilisateur</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-6 col-sm-12 text-right">
+            <a class="btn btn-info" href="{{ path('app_users_index') }}">
+                Liste des utilisateurs
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+        <div class="pull-left">
+            <h4 class="text-blue h4">Modifier un utilisateur</h4>
+            <p class="mb-30">Veuillez remplir les informations ci-dessous</p>
+        </div>
+    </div>
+
+    {{ include('user/_form.html.twig', {'button_label': 'Modifier'}) }}
+</div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}encadreur{% endblock %}
+
+{% block body %}
+<div class="page-header">
+		<div class="row">
+			<div class="col-md-6 col-sm-12">
+				<div class="title">
+					<h4>Details de l'encadreur {{encadreur.nom}} {{encadreur.prenom}}</h4>
+				</div>
+				<nav aria-label="breadcrumb" role="navigation">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Tableau de board</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Information de l'encadreur</li>
+					</ol>
+				</nav>
+			</div>
+		    <div class="col-md-6 col-sm-12 text-right">
+					<a class="btn btn-success" href="{{ path('app_encadreur_index') }}">
+						Liste des encadreurs
+					</a>
+			</div>
+		</div>
+        <div class="demo-inline-spacing mt-3">
+            <ul class="list-group">
+                <li class="list-group-item d-flex align-items-center">
+                       <strong class="mx-3"><i class="bx bx-id-card me-2"></i> Nom: </strong> {{ encadreur.nom}}
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+
+                       <strong class="mx-3"><i class="bx bx-id-card me-2"></i> Prénom: </strong> {{ encadreur.prenom}}
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+
+                       <strong class="mx-3"><i class="bx bx-id-card me-2"></i> Adresse: </strong> {{ encadreur.adresse}}
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+
+                    <strong class="mx-3"><i class="bx bx-pencil me-2"></i> Téléphone: </strong> {{ encadreur.telephone}}
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+
+                    <strong class="mx-3"><i class="bx bx-align-left me-2"></i> Email : </strong> {{ encadreur.email}}
+                </li>
+
+{#                <li class="list-group-item d-flex align-items-center">#}
+
+{#                <strong class="mx-3"> <i class="bx bx-calendar me-2"></i> Date de création: </strong>#}
+{#                {{ encadreur.createdAt ? encadreur.createdAt|date('Y-m-d H:i:s') : '' }}#}
+{#                </li>#}
+{#                <li class="list-group-item d-flex align-items-center">#}
+
+{#                <strong class="mx-3"><i class="bx bx-calendar-edit me-2"></i> Date de modification:</strong>#}
+{#                {{ encadreur.updatedAt ? encadreur.updatedAt|date('Y-m-d H:i:s') : '' }}#}
+            </ul>
+        </div>
+    </div>
+
+	</div>
+        
+{% endblock %}
