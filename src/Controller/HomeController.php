@@ -30,7 +30,7 @@ class HomeController extends AbstractController
 
 
     #[Route('/', name: 'app_home')]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    // #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function index(Request $request): Response
     {
         // Récupérer le mois et l'année depuis la requête (si présents)
